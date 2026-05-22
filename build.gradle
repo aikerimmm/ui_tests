@@ -9,9 +9,15 @@ repositories {
 def selenideVersion = "7.13.0",
     allureVersion = "2.27.0",
     junitVersion = "5.14.1",
-    slf4jVersion = "2.0.17"
+    slf4jVersion = "2.0.17",
+    aspectjVersion = "1.9.22"
+
+configurations {
+    aspectjweaver
+}
 
 dependencies {
+    aspectjweaver("org.aspectj:aspectjweaver:$aspectjVersion")
     testImplementation(
             "com.codeborne:selenide:$selenideVersion",
             "org.junit.jupiter:junit-jupiter:$junitVersion",
@@ -24,6 +30,7 @@ dependencies {
 tasks.withType(Test) {
     useJUnitPlatform()
     systemProperty 'allure.results.directory', 'build/allure-results'
+    jvmArgs "-javaagent:${configurations.aspectjweaver.asPath}"
     testLogging {
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
