@@ -13,7 +13,7 @@ public class RegistrationTests extends BaseTest {
     @Test
     @DisplayName("Успешное заполнение всех полей формы")
     @Description("Позитивно проверяются все поля формы")
-    void successfulRegistrationTest() {
+    void shouldRegisterWithAllFieldsFilled() {
         step("Открыть страницу регистрации", () -> {
             registrationPage.openPage();
         });
@@ -31,7 +31,7 @@ public class RegistrationTests extends BaseTest {
     @Test
     @DisplayName("Заполнение только обязательных полей")
     @Description("Позитивно заполняются только обязательные поля")
-    void successfulRequiredRegistrationTest() {
+    void shouldRegisterWithOnlyRequiredFields() {
         step("Открыть страницу регистрации", () -> {
             registrationPage.openPage();
         });
