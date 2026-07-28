@@ -33,13 +33,15 @@ tasks.withType(Test) {
     systemProperty 'allure.results.directory', 'build/allure-results'
     jvmArgs "-javaagent:${configurations.aspectjweaver.asPath}"
 
-    // Передаём параметры из командной строки в тесты
     systemProperty 'base.url', System.getProperty('base.url', 'https://demoqa.com')
     systemProperty 'browser', System.getProperty('browser', 'chrome')
     systemProperty 'browser.version', System.getProperty('browser.version', '')
     systemProperty 'browser.size', System.getProperty('browser.size', '1920x1080')
     systemProperty 'headless', System.getProperty('headless', 'false')
-    systemProperty 'selenoid.url', System.getProperty('selenoid.url', '')
+
+    if (System.getProperty('selenoid.url')) {
+        systemProperty 'selenoid.url', System.getProperty('selenoid.url')
+    }
 
     testLogging {
         lifecycle {
